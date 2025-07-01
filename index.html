@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Task Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="board-container">
+        <div class="column" id="todo">
+            <h2>📝 To Do</h2>
+            <div class="add-task">
+                <input type="text" id="new-task-input" placeholder="Add a new task...">
+                <select id="category-select">
+                    <option value="work">Work</option>
+                    <option value="personal">Personal</option>
+                    <option value="urgent">Urgent</option>
+                    <option value="other">Other</option>
+                </select>
+                <select id="emoji-select">
+                    <option value="💼">💼</option>
+                    <option value="🏋️">🏋️</option>
+                    <option value="📚">📚</option>
+                    <option value="🎨">🎨</option>
+                    <option value="👨‍💻">👨‍💻</option>
+                    <option value="👤">👤</option>
+                </select>
+                <button id="add-task-btn">Add Task</button>
+            </div>
+            <div class="task-list" id="todo-list"></div>
+        </div>
+        <div class="column" id="in-progress">
+            <h2>⏳ In Progress</h2>
+            <div class="task-list" id="inprogress-list"></div>
+        </div>
+        <div class="column" id="completed">
+            <h2>🥇 Completed</h2>
+            <div class="task-list" id="completed-list"></div>
+        </div>
+    </div>
+    <div id="user-modal" class="modal">
+        <div class="modal-content">
+            <h3>Welcome! Create your account</h3>
+            <input type="text" id="username-input" placeholder="Enter your username">
+            <button id="create-user-btn">Continue</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 

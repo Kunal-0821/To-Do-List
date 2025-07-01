@@ -1,0 +1,302 @@
+/* style.css */
+
+html, body {
+    height: 100%;
+}
+
+body {
+    background: #f4f7fa;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* Ensure body is a positioning context for absolute elements */
+    position: relative;
+}
+
+.board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem 0;
+    min-height: 100vh;
+}
+
+.column {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    width: 380px;
+    min-height: 500px;
+    padding: 1.3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.column h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add-task {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#new-task-input, #category-select {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #d0d7de;
+    font-size: 1rem;
+}
+
+#category-select {
+    max-width: 120px;
+    background: #fff;
+    color: #374151;
+}
+
+#add-task-btn {
+    background: #22c55e;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+#add-task-btn:hover {
+    background: #16a34a;
+}
+
+.task-list {
+    flex: 1;
+    min-height: 60px;
+}
+
+.task-card {
+    background: #f9fafb;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 0.7rem;
+    padding: 0.7rem 0.9rem 0.7rem 0.7rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    position: relative;
+    cursor: grab;
+    border-left: 6px solid #a3a3a3;
+    transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.task-card[data-category="work"] { border-left-color: #3b82f6; }
+.task-card[data-category="personal"] { border-left-color: #f59e42; }
+.task-card[data-category="urgent"] { border-left-color: #ef4444; }
+.task-card[data-category="other"] { border-left-color: #a3a3a3; }
+
+.task-card.dragging {
+    opacity: 0.6;
+    box-shadow: 0 0 0 3px #38bdf8;
+}
+
+.task-card .avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #e0e7ef;
+    color: #374151;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
+.task-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.task-title {
+    font-size: 1.05rem;
+    font-weight: 500;
+    word-break: break-word;
+    cursor: pointer;
+}
+
+.task-title.editing {
+    background: #fffbe7;
+    border: 1px solid #facc15;
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+.task-meta {
+    font-size: 0.85rem;
+    color: #64748b;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.task-label {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin-right: 0.3rem;
+    color: #fff;
+}
+.task-label.work { background: #3b82f6; }
+.task-label.personal { background: #f59e42; }
+.task-label.urgent { background: #ef4444; }
+.task-label.other { background: #a3a3a3; }
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 1.2rem;
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.delete-btn:hover {
+    background: #fee2e2;
+}
+
+/* New CSS for drag-over effect on columns */
+.column-container.drag-over-highlight {
+    background: #e0f2fe; /* Light blue background */
+    transition: background 0.2s;
+}
+
+@media (max-width: 1000px) {
+    .board-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .column {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .add-task {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.3rem;
+    }
+    #add-task-btn {
+        width: 100%;
+    }
+    #category-select {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+/* Modal styles */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  min-width: 300px;
+}
+#username-input {
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #d0d7de;
+  font-size: 1.1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+#create-user-btn {
+  background: #22c55e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#create-user-btn:hover {
+  background: #16a34a;
+}
+
+#emoji-select {
+    max-width: 60px;
+    background: #fff;
+    color: #374151;
+    font-size: 1.3rem;
+    border-radius: 6px;
+    border: 1px solid #d0d7de;
+    padding: 0.5rem 0.3rem;
+    flex-shrink: 0;
+}
+
+
+/* New CSS for the user bar */
+#user-bar {
+    position: absolute;
+    top: 18px;
+    right: 40px;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1rem; /* Adjust as needed */
+    color: #374151; /* Default text color */
+}
+
+#switch-user-btn {
+    background: #f3f4f6;
+    border: none;
+    border-radius: 6px;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: #374151; /* Button text color */
+    transition: background 0.2s, color 0.2s;
+}
+
+#switch-user-btn:hover {
+    background: #e5e7eb;
+    color: #1f2937;
+}
