@@ -2,10 +2,10 @@
 FROM nginx:alpine
 
 # Remove default nginx static files
-RUN rm -rf /usr/share/nginx/html/*
+RUN rm -rf /usr/share/nginx/index.html/*
 
 # Copy project files
-COPY . /usr/share/nginx/html
+COPY . /usr/share/nginx/index.html
 
 # Expose port 80
 EXPOSE 80
